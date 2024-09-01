@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// eslint-disable-next-line import/order
 import dayjs from 'dayjs';
 import 'dayjs/locale/ru';
 dayjs.locale('ru');

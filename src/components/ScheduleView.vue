@@ -5,7 +5,8 @@ import Button from 'primevue/button';
 
 defineProps({
   tableData: {
-    type: Array
+    type: Array,
+    required: true
   }
 });
 
