@@ -1,8 +1,14 @@
 <script setup lang="ts">
+import { Chart as ChartJS } from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import Chart from 'primevue/chart';
 import { computed } from 'vue';
 
+// Импортируем и регистрируем плагин datalabels
+
 import { Hormones } from '@/enums/Hormones';
+
+ChartJS.register(ChartDataLabels);
 
 const props = defineProps({
   checkups: {
@@ -10,6 +16,7 @@ const props = defineProps({
     required: true
   }
 });
+
 const testosteroneVsLHData = computed(() => {
   return {
     labels: ['0', '1', '2', '3', '4'],
@@ -87,6 +94,17 @@ const chartOptions = {
   plugins: {
     legend: {
       position: 'top'
+    },
+    datalabels: {
+      anchor: 'end',
+      align: 'end',
+      color: '#555',
+      font: {
+        weight: 'bold'
+      },
+      formatter: function (value) {
+        return value !== null ? value : ''; // Не показывать пустые значения
+      }
     }
   }
 };

@@ -9,9 +9,3 @@ export const MedicationDescriptions: Record<MedicationNames, string> = {
   [MedicationNames.ANASTROZOLE]: 'Анастразол',
   [MedicationNames.DOSTINEX]: 'Достинекс'
 };
-
-// export enum MedicationNames {
-//   CLOSTILBEGIT = 'Клостилбегит',
-//   ANASTROZOLE = 'Анастразол',
-//   DOSTINEX = 'Достинекс'
-// }

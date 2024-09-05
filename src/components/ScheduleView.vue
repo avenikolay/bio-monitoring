@@ -1,6 +1,5 @@
 <script setup lang="ts">
 // @ts-ignore
-import html2pdf from 'html2pdf.js';
 import Button from 'primevue/button';
 
 defineProps({
@@ -9,25 +8,11 @@ defineProps({
     required: true
   }
 });
-
-const generatePDF = () => {
-  const element = document.getElementById('table-content'); // Ссылка на элемент с таблицей
-  const options = {
-    margin: 1,
-    filename: 'schedule.pdf',
-    image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 2 },
-    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
-    pagebreak: { mode: 'avoid-all', before: '#page2el' }
-  };
-
-  html2pdf().from(element).set(options).save();
-};
 </script>
 
 <template>
   <div>
-    <Button label="Скачать PDF" class="mb-4" @click="generatePDF"> Скачать PDF </Button>
+    <!--   -->
     <div id="table-content">
       <div
         v-for="(week, weekIndex) in tableData"

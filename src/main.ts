@@ -1,3 +1,7 @@
+import BASE_URL from '@/constants/BaseUrl';
+
+console.log(BASE_URL);
+
 import './assets/style.css';
 import Aura from '@primevue/themes/aura';
 import PrimeVue from 'primevue/config';
