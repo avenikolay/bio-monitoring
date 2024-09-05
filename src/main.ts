@@ -1,6 +1,6 @@
 import BASE_URL from '@/constants/BaseUrl';
 
-console.log(BASE_URL);
+console.log(import.meta.env.VITE_API_URL);
 
 import './assets/style.css';
 import Aura from '@primevue/themes/aura';
