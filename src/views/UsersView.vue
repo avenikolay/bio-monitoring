@@ -23,10 +23,16 @@ const newUser = ref({
 
 // Получение списка пользователей
 const getUsers = async () => {
-  const response = await fetch(`${BASE_URL}/users`);
-  const data = await response.json();
-  users.value.push(...data);
+  try {
+    const response = await fetch(`${BASE_URL}/users`);
+    const data = await response.json();
+    users.value = data; // Очищаем и обновляем список пользователей
+  } catch (error) {
+    console.error('Ошибка при получении списка пользователей:', error);
+  }
 };
+
+// Вызов функции при загрузке компонента
 getUsers();
 
 // Создание нового пользователя
@@ -39,10 +45,11 @@ const createUser = async () => {
       },
       body: JSON.stringify(newUser.value)
     });
-    const data = await response.json();
 
-    // Обновляем список пользователей
-    users.value.push(data);
+    if (!response.ok) throw new Error('Ошибка при создании пользователя');
+
+    // Перезапрашиваем список пользователей после создания нового
+    await getUsers();
 
     // Закрываем модалку после успешного создания
     showModal.value = false;
@@ -62,8 +69,8 @@ const deleteUser = async (userId) => {
       method: 'DELETE'
     });
     if (response.ok) {
-      // Удаляем пользователя из списка на фронтенде
-      users.value = users.value.filter((user) => user.id !== userId);
+      // Перезапрашиваем список пользователей после удаления
+      await getUsers();
     }
   } catch (error) {
     console.error('Ошибка при удалении пользователя:', error);
