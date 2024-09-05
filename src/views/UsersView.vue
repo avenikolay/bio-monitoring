@@ -7,6 +7,8 @@ import Dialog from 'primevue/dialog';
 import InputText from 'primevue/inputtext';
 import { ref } from 'vue';
 
+import BASE_URL from '@/constants/BaseUrl';
+
 // Хранение списка пользователей
 const users = ref([]);
 
@@ -21,7 +23,7 @@ const newUser = ref({
 
 // Получение списка пользователей
 const getUsers = async () => {
-  const response = await fetch('http://localhost:3333/users');
+  const response = await fetch(`${BASE_URL}/users`);
   const data = await response.json();
   users.value.push(...data);
 };
@@ -30,7 +32,7 @@ getUsers();
 // Создание нового пользователя
 const createUser = async () => {
   try {
-    const response = await fetch('http://localhost:3333/users', {
+    const response = await fetch(`${BASE_URL}/users`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -56,7 +58,7 @@ const createUser = async () => {
 // Удаление пользователя
 const deleteUser = async (userId) => {
   try {
-    const response = await fetch(`http://localhost:3333/users/${userId}`, {
+    const response = await fetch(`${BASE_URL}/users/${userId}`, {
       method: 'DELETE'
     });
     if (response.ok) {
